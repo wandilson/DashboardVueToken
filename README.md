@@ -51,7 +51,7 @@ php artisan serve
 Todo novo registro gera um tenant/empresa, assim todo o conteudo gerado fica relacionado ao tenant.
 O usuário ao se registrar se torna administrador do tenant.
 
-```json
+```
 ## Novo Registro
 
 Method: POST
@@ -69,7 +69,7 @@ Dados enviados:
 ```
 
 Após o registro passar pelas validações e ser inserido o usuário é logado automaticamente:
-```json
+```
 ## Retorno após registro
 
  Dados retornados:
@@ -92,7 +92,7 @@ Após o registro passar pelas validações e ser inserido o usuário é logado a
 &nbsp;
 ##### Profile
 Recurso que permite o usuário editar suas informações pessoais assim como trocar sua senha.
-```json
+```
 ## Retorna dados do perfil
 
 Method: Get
@@ -108,7 +108,7 @@ Dados retornados:
 }
 ```
 
-```json
+```
 ## Atualiza dados do perfil
 
 Method: Put
@@ -131,7 +131,7 @@ Dados enviados:
 ##### Users
 A aplicação permite adicionar outros usuários ao tenant, assim vão poder gerenciar todas as informações.
 
-```json
+```
 ## Listar Usuário
 
 Method: Get
@@ -149,7 +149,7 @@ Lista de Usuários:
 ```
 
 
-```json
+```
 ## Novo Usuário
 
 Method: Post
@@ -167,7 +167,7 @@ API: localhost:8000/api/config/users
 
 
 É possivel habilitar e desabilitar o usuário enviando somente o id para a rota expecifica, exceto o de type = 1 "Administrador"
-```json
+```
 ## Habilitar/Desabilitar usuário
 
 Method: Put
@@ -188,7 +188,7 @@ Uma feature é uma funcionalidade do sistema que entrega um benefício ou resolv
 - [x] Editar perfil do usuário logado
 - [x] Gerenciar usuários por tenant:
 - [x] O adm pode excluir usuários exceto seu proprio cadastro.
-- [ ] Habilitar/Desabilitar usuários.
+- [x] Habilitar/Desabilitar usuários.
 - [ ] Usuários desabilitados não podem acessar o sistema.
 - [ ] Acrescentar Mensagem "Registro deletado com Sucesso"
 - [ ] Visualizar/Remover tokens ativos
