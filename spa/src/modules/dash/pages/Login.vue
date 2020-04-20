@@ -67,6 +67,9 @@ export default {
 				this.$router.push({ name: "app"});
 			})
 			.catch(error => {
+				if(error.response.status === 401) {
+					this.errors = error.response.data;
+				}
 				if(error.response.status === 422) {
 					this.errors = error.response.data.errors;
 				}

@@ -25,8 +25,15 @@ class LoginCtrl extends Controller
             'password' => 'required',
             'device_name' => 'required'
         ]);
-    
+        
         $user = User::where('cpf', $request->cpf)->first();
+
+        // Verifica se o usuário esta ativo
+        if($user->stats == 0){
+            return response()->json(['response'=>'O usuário foi desativado, para mais informações entre em contato conosco!'], 401); 
+        }
+
+
     
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([

@@ -189,7 +189,7 @@ Uma feature é uma funcionalidade do sistema que entrega um benefício ou resolv
 - [x] Gerenciar usuários por tenant:
 - [x] O adm pode excluir usuários exceto seu proprio cadastro.
 - [x] Habilitar/Desabilitar usuários.
-- [ ] Usuários desabilitados não podem acessar o sistema.
+- [x] Usuários desabilitados não podem acessar o sistema.
 - [ ] Acrescentar Mensagem "Registro deletado com Sucesso"
 - [ ] Visualizar/Remover tokens ativos
 - [ ] Ao se registrar enviar e-mail de boas vindas
