@@ -13,13 +13,16 @@
 						<!-- A custom formatted column -->
 						<template v-slot:cell(stats)="row">
 							<span v-show="row.item.stats == 1">Ativo</span>
-							<span v-show="row.item.stats == 0">Inativo</span>
+							<span v-show="row.item.stats == 0">Bloqueado</span>
 						</template>
 
 						<template v-slot:cell(actions)="row">
 							<b-dropdown size="sm" id="dropdown-1" text="Opções" variant="outline-primary">
 								<b-dropdown-item @click.prevent="edit(row.item)">Editar</b-dropdown-item>
-								<b-dropdown-item>Bloquear</b-dropdown-item>
+								<b-dropdown-item @click.prevent="actionStats(row.item['id'])">
+									<span v-if="row.item['stats'] == 0">Desbloquear</span>
+									<span v-if="row.item['stats'] == 1">Bloquear</span>
+								</b-dropdown-item>
 								<b-dropdown-divider v-if="row.item['type'] != 1"></b-dropdown-divider>
 								<b-dropdown-item v-if="row.item['type'] != 1" variant="danger" @click.prevent="remove(row.item['id'])">Deletar</b-dropdown-item>
 							</b-dropdown>
@@ -114,7 +117,19 @@ export default {
 		},
 
 
-
+		actionStats(itemId){
+			let form = {
+				id: itemId
+			}
+			console.log(form);
+			Users.disabled(form)
+			.then( () => {
+				this.success = true;
+				this.loadUser();
+			}).catch( error => {
+				this.errors = error.response.data.errors;
+			})
+		},
 
 		newRegister(){
 			this.form = {};

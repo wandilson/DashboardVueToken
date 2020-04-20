@@ -15,5 +15,9 @@ export default {
 
     remove(id) {        
         return Api().delete("/config/users/"+id);
+    },
+
+    disabled(form) {        
+        return Api().post("/config/users/disable", form);
     }
 }

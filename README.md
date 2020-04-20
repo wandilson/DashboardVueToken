@@ -51,7 +51,7 @@ php artisan serve
 Todo novo registro gera um tenant/empresa, assim todo o conteudo gerado fica relacionado ao tenant.
 O usuário ao se registrar se torna administrador do tenant.
 
-````Json
+```json
 ## Novo Registro
 
 Method: POST
@@ -66,10 +66,10 @@ Dados enviados:
 	password_confirmation: '',
 	device_name: 'Browser'
 }
-````
+```
 
 Após o registro passar pelas validações e ser inserido o usuário é logado automaticamente:
-````Json
+```json
 ## Retorno após registro
 
  Dados retornados:
@@ -84,7 +84,7 @@ Após o registro passar pelas validações e ser inserido o usuário é logado a
 	 },
 	 token: ''
  }
-````
+```
 
  Após o retorno o token é gravado no localStorage, apartir disso é usado em todos os cabeçalhos de requisições, autorizando o usuário.
 
@@ -92,7 +92,7 @@ Após o registro passar pelas validações e ser inserido o usuário é logado a
 &nbsp;
 ##### Profile
 Recurso que permite o usuário editar suas informações pessoais assim como trocar sua senha.
-````Json
+```json
 ## Retorna dados do perfil
 
 Method: Get
@@ -106,9 +106,9 @@ Dados retornados:
 	name: '',
 	email: '',
 }
-````
+```
 
-````Json
+```json
 ## Atualiza dados do perfil
 
 Method: Put
@@ -124,14 +124,14 @@ Dados enviados:
 	password: '',
 	password_confirmation: ''
 }
-````
+```
 
 
 &nbsp;
 ##### Users
 A aplicação permite adicionar outros usuários ao tenant, assim vão poder gerenciar todas as informações.
 
-````Json
+```json
 ## Listar Usuário
 
 Method: Get
@@ -146,10 +146,10 @@ Lista de Usuários:
 	name: '',
 	email: ''
 }
-````
+```
 
 
-````Json
+```json
 ## Novo Usuário
 
 Method: Post
@@ -163,11 +163,11 @@ API: localhost:8000/api/config/users
 	password: '',
 	password_confirmation: ''
  }
-````
+```
 
 
 É possivel habilitar e desabilitar o usuário enviando somente o id para a rota expecifica, exceto o de type = 1 "Administrador"
-````Json
+```json
 ## Habilitar/Desabilitar usuário
 
 Method: Put
@@ -177,7 +177,7 @@ Dados enviados:
 {
 	id: ''
 }
-````
+```
 
 
 &nbsp;
