@@ -6,12 +6,14 @@
 						<div class="text-center text-muted mb-4">
 							<small>Vamos fazer login? Informe seus dados corretamente!</small>
 						</div>
+
 						<base-alert type="danger" v-show="errors != ''">
 							<strong>Humm!</strong> Não conseguimos fazer seu login!
 							<ul class="mt-4">
 								<li v-for="(erro, index) of errors" :key="index">{{ erro[0] }}</li>
 							</ul>
 						</base-alert>
+
 						<form role="form">
 							<base-input class="input-group-alternative mb-3"
 										placeholder="Cpf"
@@ -47,7 +49,7 @@
 
 
 	<!-- 
-		Modal Novo User / Edit User
+		Modal Redefinir Senha
 	-->
 	<modal :show.sync="modals.modal" body-classes="p-0" modal-classes="modal-dialog-centered modal-sm">
 		<card type="secondary" shadow
@@ -64,10 +66,10 @@
 					<strong>Olá!</strong> Enviamos sua nova senha por e-mail!
 				</base-alert>
 				
-				<base-alert type="danger" v-show="errors != ''">
+				<base-alert type="danger" v-show="errorRedefine != ''">
 					<strong>Humm!</strong> Não conseguimos inserir seu registro!
 					<ul class="mt-4">
-						<li>{{errors}}</li>
+						<li>{{errorRedefine}}</li>
 					</ul>
 				</base-alert>
 
@@ -111,11 +113,13 @@
 					device_name: 'Browser'
 				},
 				errors: [],
+				errorRedefine: [],
 				success: false
 			}
 		},
 		methods: {
 			modalRedefineOpen(){
+				this.errorRedefine = '';
 				this.modals.modal = true;
 			},
 			redefinePass(){
@@ -124,7 +128,7 @@
 					this.success = true;
 				})
 				.catch(error => {
-					this.errors = error.response.data;
+					this.errorRedefine = error.response.data;
 				});
 			},
 			login(){
@@ -132,7 +136,6 @@
 				.then( response => {
 					localStorage.setItem("token", response.data.token);
 					this.$router.push({ name: "dashboard"});
-					console.log(response)
 				})
 				.catch(error => {
 					if(error.response.status === 401) {
@@ -140,6 +143,7 @@
 					}
 					if(error.response.status === 422) {
 						this.errors = error.response.data.errors;
+						console.log(error.response.data.errors);
 					}
 					console.log(error)
 				});

@@ -26,8 +26,9 @@ Feito em ***Vuejs2***, e templates free para agilizar o desenvolvimento.
 
 - [x] Login
 	- [ ] Me manter conectado
+	- [x] Bloqueia acesso de usuários inativos.
+
 - [x] Logout
-	- [ ] Bloqueia acesso de usuários inativos.
 	- [ ] Deslogar ao fechar aba do navegador.
 
 - [x] Redefinir Senha

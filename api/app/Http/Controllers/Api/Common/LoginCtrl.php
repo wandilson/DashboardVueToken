@@ -30,7 +30,7 @@ class LoginCtrl extends Controller
 
         // Verifica se o usuário esta ativo
         if($user->stats == 0){
-            return response()->json(['response'=>'O usuário foi desativado, para mais informações entre em contato conosco!'], 401); 
+            return response()->json(['stats'=> ['O usuário foi desativado, para mais informações entre em contato conosco!']], 401); 
         }
 
 
