@@ -22,7 +22,7 @@ Feito em ***Vuejs2***, e templates free para agilizar o desenvolvimento.
 > 21/04
 - [x] Register
 	- [x] Envia e-mail de boas vindas ao se registrar.
-	- [ ] Eu concordo com a Política de Privacidade.
+	- [x] Eu concordo com a Política de Privacidade.
 
 - [x] Login
 	- [ ] Me manter conectado

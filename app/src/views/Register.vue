@@ -45,22 +45,47 @@
 									v-model="form.password_confirmation">
 						</base-input>
 
-						<!--
+						
 							<div class="row my-4">
 								<div class="col-12">
-									<base-checkbox class="custom-control-alternative">
-										<span class="text-muted">Eu concordo com a <a href="#!">Política de Privacidade</a></span>
+									<base-checkbox class="custom-control-alternative" v-model="checked">
+										<span class="text-muted">Eu concordo com a <a href="#!" @click.prevent="modals.modal = true">Política de Privacidade</a></span>
 									</base-checkbox>
+									<small v-show="checked == false">É necessário aceitar o termo para envio do formulário</small>
 								</div>
+
 							</div>
-						-->
+						
 						<div class="text-center">
-							<base-button @click.prevent="register" type="primary" class="my-4">Criar Conta</base-button>
+							<base-button @click.prevent="register" type="primary" class="my-4" :disabled="!isValid">Criar Conta</base-button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
+
+
+	<!-- 
+		Modal Politica de Privacidade
+	-->
+	<modal :show.sync="modals.modal" body-classes="p-0" modal-classes="modal-dialog-centered modal-sm">
+		<card type="secondary" shadow
+				header-classes="bg-white pb-5"
+				body-classes="px-lg-5 py-lg-5"
+				class="border-0">
+				
+			<template>
+					<h1>Termo que ninguém Lê!</h1>
+				
+
+					<div class="text-center">
+						<base-button type="secondary" @click="modals.modal = false">Sair</base-button>
+					</div>
+			</template>
+		</card>
+
+	</modal>
+
 	</div>
 </template>
 <script>
@@ -69,6 +94,10 @@
 		name: 'register',
 		data() {
 			return {
+				modals: {
+					modal: false
+				},
+				checked: false,
 				form: {
 					cpf: '',
 					name: '',
@@ -77,7 +106,13 @@
 					password_confirmation: '',
 					device_name: 'Browser'
 				},
+				isChecked: false,
 				errors: []
+			}
+		},
+		computed: {
+			isValid: function () {
+				return  this.checked != false;
 			}
 		},
 		methods: {
