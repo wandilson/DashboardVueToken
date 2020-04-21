@@ -4,7 +4,7 @@ import DashboardLayout from '@/layout/DashboardLayout'
 import AuthLayout from '@/layout/AuthLayout'
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   linkExactActiveClass: 'active',
   routes: [
@@ -12,6 +12,7 @@ export default new Router({
       path: '/',
       redirect: 'dashboard',
       component: DashboardLayout,
+      meta: { requiresAuth: true },
       children: [
         {
           path: '/dashboard',
@@ -75,3 +76,27 @@ export default new Router({
     }
   ]
 })
+
+
+function isloggedIn(){
+  return localStorage.getItem("token");
+}
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+      // this route requires auth, check if logged in
+      // if not, redirect to login page.
+      if (!isloggedIn()) {
+          next({
+              path: '/login',
+              //query: { redirect: to.fullPath }
+          })
+      } else {
+          next()
+      }
+  } else {
+      next() // make sure to always call next()!
+  }
+});
+
+export default router

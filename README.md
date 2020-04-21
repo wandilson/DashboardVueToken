@@ -1,29 +1,39 @@
 # Dashboard + SPA
 ### Introdução
-Aplicativo SPA multitenant, usa vuejs 2 que se conecta a uma Api Laravel, autoriza acesso usando **token**, "Laravel/Sanctum", sendo o mesmo gravado em localStorage.
+Aplicativo SPA multitenant, usa vuejs 2 que se conecta a uma Api Laravel, autoriza acesso usando **token**, "Laravel/Sanctum", sendo o mesmo gravado em localStorage e banco de dados.
 
-**OBJETIVO:** Compartilhar o código, **aprender** com possiveis sugestões, **e melhorar** o código com o auxilio da comunidade.
+**OBJETIVO:** Compartilhar aplicação, **aprender** com possíveis sugestões, **e melhorar** o código com o auxílio da comunidade.
 
 ## API
-Feita em Laravel 7, usando sanctum para geração de token.
+Feita em Laravel 7, usando Sanctum para geração de token.
 
 
 &nbsp;
 ## APP: VueJs
-Feito em ***Vuejs***, e templates free para agilizar o desenvolvimento.
+Feito em ***Vuejs2***, e templates free para agilizar o desenvolvimento.
 
 - [x] Vue Argon Dashboard Free - https://www.creative-tim.com/
 - [x] Vuejs
 - [x] Vue-Router
-- [ ] Axios
+- [x] Axios
+- [ ] Vuex
 
-### Funcionalidades
+### Features
 > 21/04
-- [ ] Register
-- [ ] Login / Redefinir Senha
+- [x] Register
+- [ ] Envia e-mail de boas vindas ao se registrar.
+
+- [x] Login
+- [x] Logout
+- [ ] Bloqueia acesso de usuários inativos.
+
+- [ ] Redefinir Senha
 - [ ] Profile
 - [ ] Tokens
 - [ ] Users
+	- Usuários com o ***Type:1*** não podem ser excluidos nem bloqueados.
+
+
 
 
 &nbsp;
@@ -64,9 +74,9 @@ Após o registro passar pelas validações e ser inserido, o usuário é logado 
 	 token: ''
  }
 ```
- 1. Após o retorno o token é gravado no localStorage
- 2. Token é usado em todos os cabeçalhos de requisições, autorizando o usuário.
- 2. É enviado um e-mail de boas vindas ao usuário.
+	- Após o retorno o token é gravado no localStorage
+	- Token é usado em todos os cabeçalhos de requisições, autorizando o usuário.
+	- Ao termino do registro é enviado um e-mail de boas vindas ao usuário.
  
 
 &nbsp;
@@ -102,8 +112,8 @@ Dados enviados:
 	 token: ''
  }
 ```
- 1. Após o retorno o token é gravado no localStorage
- 2. Token é usado em todos os cabeçalhos de requisições, autorizando o usuário.
+	- Após o retorno o token é gravado no localStorage
+	- Token é usado em todos os cabeçalhos de requisições, autorizando o usuário.
 
 
 &nbsp;
@@ -163,6 +173,9 @@ Lista de Usuários:
 	cpf: '',
 	name: '',
 	email: ''
+},
+{
+	...
 }
 ```
 
@@ -232,6 +245,11 @@ Retorno após token removido:
 	stats: 201
 }
 ```
+
+&nbsp;
+#### Errors Code
+Lista de possiveis erros gerados.
+
 
 ---
 

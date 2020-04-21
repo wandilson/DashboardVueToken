@@ -41,35 +41,45 @@
                             <span>Tokens</span>
                         </router-link>
                         <div class="dropdown-divider"></div>
-                        <router-link to="/logout" class="dropdown-item">
+                        <a href="javascript:void(0)" @click="logout" class="dropdown-item">
                             <i class="ni ni-user-run"></i>
                             <span>Sair</span>
-                        </router-link>
+                        </a>
                     </template>
                 </base-dropdown>
             </li>
         </ul>
     </base-nav>
 </template>
+
+
 <script>
-  export default {
-    data() {
-      return {
-        activeNotifications: false,
-        showMenu: false,
-        searchQuery: ''
-      };
-    },
-    methods: {
-      toggleSidebar() {
-        this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
-      },
-      hideSidebar() {
-        this.$sidebar.displaySidebar(false);
-      },
-      toggleMenu() {
-        this.showMenu = !this.showMenu;
-      }
-    }
-  };
+	import Auth from '@/apis/Auth';
+	export default {
+		data() {
+		return {
+			activeNotifications: false,
+			showMenu: false,
+			searchQuery: ''
+		};
+		},
+		methods: {
+		toggleSidebar() {
+			this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+		},
+		hideSidebar() {
+			this.$sidebar.displaySidebar(false);
+		},
+		toggleMenu() {
+			this.showMenu = !this.showMenu;
+		},
+
+		logout(){
+				Auth.logout().then( () => {
+					localStorage.removeItem("token");
+					this.$router.push({ name: "login"});
+				});
+			}
+		}
+	};
 </script>

@@ -6,25 +6,31 @@
 						<div class="text-center text-muted mb-4">
 							<small>Vamos fazer login? Informe seus dados corretamente!</small>
 						</div>
+						<base-alert type="danger" v-show="errors != ''">
+							<strong>Humm!</strong> Não conseguimos fazer seu login!
+							<ul class="mt-4">
+								<li v-for="(erro, index) of errors" :key="index">{{ erro[0] }}</li>
+							</ul>
+						</base-alert>
 						<form role="form">
 							<base-input class="input-group-alternative mb-3"
 										placeholder="Cpf"
 										addon-left-icon="ni ni-lock-circle-open"
-										v-model="model.cpf">
+										v-model="form.cpf">
 							</base-input>
 
 							<base-input class="input-group-alternative"
 										placeholder="Password"
 										type="password"
 										addon-left-icon="ni ni-lock-circle-open"
-										v-model="model.password">
+										v-model="form.password">
 							</base-input>
 
 							<base-checkbox class="custom-control-alternative">
 								<span class="text-muted">Manter conectado</span>
 							</base-checkbox>
 							<div class="text-center">
-								<base-button type="primary" class="my-4">Sign in</base-button>
+								<base-button type="primary" class="my-4" @click.prevent="login">Acessar</base-button>
 							</div>
 						</form>
 					</div>
@@ -40,18 +46,43 @@
 			</div>
 		</div>
 </template>
+
+
+
 <script>
-export default {
-	name: 'login',
-	data() {
-		return {
-			model: {
-				cpf: '',
-				password: ''
+	import Auth from '@/apis/Auth';
+	export default {
+		name: 'login',
+		data() {
+			return {
+				form: {
+					cpf: '',
+					password: '',
+					device_name: 'Browser'
+				},
+				errors: []
+			}
+		},
+		methods: {
+			login(){
+				Auth.login(this.form)
+				.then( response => {
+					localStorage.setItem("token", response.data.token);
+					this.$router.push({ name: "dashboard"});
+					console.log(response)
+				})
+				.catch(error => {
+					if(error.response.status === 401) {
+						this.errors = error.response.data;
+					}
+					if(error.response.status === 422) {
+						this.errors = error.response.data.errors;
+					}
+					console.log(error)
+				});
 			}
 		}
 	}
-}
 </script>
 <style>
 </style>
