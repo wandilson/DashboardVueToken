@@ -13,6 +13,10 @@ export default {
         return Api().post("/config/logout");
     },
 
+    redefinePass(form) {        
+        return Api().post("/redefine-password", form);
+    },
+
     loadUser() {        
         return Api().get("/config/loadUser");
     },

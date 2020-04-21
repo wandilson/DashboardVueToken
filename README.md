@@ -21,17 +21,17 @@ Feito em ***Vuejs2***, e templates free para agilizar o desenvolvimento.
 ### Features
 > 21/04
 - [x] Register
-- [ ] Envia e-mail de boas vindas ao se registrar.
+	- [ ] Envia e-mail de boas vindas ao se registrar.
 
 - [x] Login
 - [x] Logout
-- [ ] Bloqueia acesso de usuários inativos.
+	- [ ] Bloqueia acesso de usuários inativos.
 
-- [ ] Redefinir Senha
+- [x] Redefinir Senha
 - [ ] Profile
 - [ ] Tokens
 - [ ] Users
-	- Usuários com o ***Type:1*** não podem ser excluidos nem bloqueados.
+	- [ ] Usuários com o ***Type:1*** não podem ser excluidos nem bloqueados.
 
 
 

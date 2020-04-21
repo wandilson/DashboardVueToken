@@ -18,20 +18,24 @@ class RedefinePassCtrl extends Controller
      */
 
     public function redefine(Request $request){
-        
+
         $data = $request->all();
 
         $stats = User::where('email', $data['email'])->first();
-        
+
         //return $stats;
 
-        if($stats->stats == 1)
+        if($stats)
         {
-
-            Mail::to('wandilson.oliver@gmail.com')->send(new RedefinePassword($stats));
+            if($stats->stats == 1){
+                Mail::to($data['email'])->send(new RedefinePassword($stats));
+            }else{
+                return response()->json(['response'=>'Usuário inativo, não pode ser alterado!'], 404);
+            }
+            
             
         }else{
-            return response()->json(['response'=>'Usuário inativo, não pode ser alterado!'], 201);
+            return response()->json(['response'=>'Usuário não encontrado!'], 404);
         }
 
     }

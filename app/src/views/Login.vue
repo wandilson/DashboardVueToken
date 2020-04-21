@@ -37,13 +37,59 @@
 				</div>
 				<div class="row mt-3">
 					<div class="col-6">
-						<a href="#" class="text-light"><small>Esqueceu sua senha?</small></a>
+						<a href="#" class="text-light" @click.prevent="modalRedefineOpen"><small>Esqueceu sua senha?</small></a>
 					</div>
 					<div class="col-6 text-right">
 						<router-link to="/register" class="text-light"><small>Criar Conta</small></router-link>
 					</div>
 				</div>
 			</div>
+
+
+	<!-- 
+		Modal Novo User / Edit User
+	-->
+	<modal :show.sync="modals.modal" body-classes="p-0" modal-classes="modal-dialog-centered modal-sm">
+		<card type="secondary" shadow
+				header-classes="bg-white pb-5"
+				body-classes="px-lg-5 py-lg-5"
+				class="border-0">
+				
+			<template>
+				<div class="text-center text-muted mb-4">
+					<h2>Oi, vamos redefinir sua senha!</h2>
+				</div>
+
+				<base-alert type="success" v-show="success">
+					<strong>Olá!</strong> Enviamos sua nova senha por e-mail!
+				</base-alert>
+				
+				<base-alert type="danger" v-show="errors != ''">
+					<strong>Humm!</strong> Não conseguimos inserir seu registro!
+					<ul class="mt-4">
+						<li>{{errors}}</li>
+					</ul>
+				</base-alert>
+
+				<form role="form">
+					<base-input alternative
+						class="mb-3"
+						placeholder="E-mail"
+						addon-left-icon="ni ni-email-83"
+						v-model="form.email">
+					</base-input>
+
+					<div class="text-center">
+						<base-button type="secondary" @click="modals.modal = false">Sair</base-button>
+						<base-button type="primary" class="my-4" @click.prevent="redefinePass">Redefinir</base-button>
+					</div>
+				</form>
+			</template>
+		</card>
+	</modal>
+
+
+
 		</div>
 </template>
 
@@ -55,15 +101,32 @@
 		name: 'login',
 		data() {
 			return {
+				modals: {
+					modal: false
+				},
 				form: {
+					email: '',
 					cpf: '',
 					password: '',
 					device_name: 'Browser'
 				},
-				errors: []
+				errors: [],
+				success: false
 			}
 		},
 		methods: {
+			modalRedefineOpen(){
+				this.modals.modal = true;
+			},
+			redefinePass(){
+				Auth.redefinePass(this.form)
+				.then( response => {
+					this.success = true;
+				})
+				.catch(error => {
+					this.errors = error.response.data;
+				});
+			},
 			login(){
 				Auth.login(this.form)
 				.then( response => {
