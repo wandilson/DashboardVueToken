@@ -1,55 +1,35 @@
-# Dashboard: API Laravel + Vuejs
+# Dashboard + SPA
 ### Introdução
-Aplicativo SPA multitenant, usa vuejs 2 e se conecta a uma Api Laravel, efetua login usando **token** de acesso "Laravel/Sanctum", sendo o mesmo gravado em localStorage.
+Aplicativo SPA multitenant, usa vuejs 2 que se conecta a uma Api Laravel, autoriza acesso usando **token**, "Laravel/Sanctum", sendo o mesmo gravado em localStorage.
 
 **OBJETIVO:** Compartilhar o código, **aprender** com possiveis sugestões, **e melhorar** o código com o auxilio da comunidade.
 
-&nbsp;
-### COMO POSSO TESTAR?
-Baixe as duas pastas e dentro de suas respectivos diretórios execute os comandos:
-
-##### VUEJS: Setup Inicial
-```
-npm install
-```
-
-##### VUEJS: Rodar server
-```
-npm run serve
-```
-
-
-##### API: Criar tabelas no banco
-```
-php artisan migrate
-```
-##### API: Rodar servidor PHP
-```
-php artisan serve
-```
-**Não esqueça de configurar e criar o banco de dados**
+## API
+Feita em Laravel 7, usando sanctum para geração de token.
 
 
 &nbsp;
+## APP: VueJs
+Feito em ***Vuejs***, e templates free para agilizar o desenvolvimento.
 
-### RECURSOS USADOS NA APLICAÇÃO
-
-- [x] Laravel 7.0
-- [X] laravel/sanctum
----
-- [x] Vuejs 2
-- [x] Bootstrap-vue
+- [x] Vue Argon Dashboard Free - https://www.creative-tim.com/
+- [x] Vuejs
 - [x] Vue-Router
-- [x] Axios
-- [ ] Vuex
+- [ ] Axios
 
+### Funcionalidades
+> 21/04
+- [ ] Register
+- [ ] Login / Redefinir Senha
+- [ ] Profile
+- [ ] Tokens
+- [ ] Users
 
 
 &nbsp;
-#### Funcionalidades Comuns
-##### Register
-Todo novo registro gera um tenant/empresa, assim todo o conteudo gerado fica relacionado ao tenant.
-O usuário ao se registrar se torna administrador do tenant.
+#### Register
+Todo novo registro gera um tenant/empresa, assim todo o conteúdo gerado fica relacionado ao tenant.
+O usuário ao se registrar torna-se administrador do tenant.
 
 ```
 ## Novo Registro
@@ -67,8 +47,7 @@ Dados enviados:
 	device_name: 'Browser'
 }
 ```
-
-Após o registro passar pelas validações e ser inserido o usuário é logado automaticamente:
+Após o registro passar pelas validações e ser inserido, o usuário é logado automaticamente:
 ```
 ## Retorno após registro
 
@@ -85,13 +64,52 @@ Após o registro passar pelas validações e ser inserido o usuário é logado a
 	 token: ''
  }
 ```
+ 1. Após o retorno o token é gravado no localStorage
+ 2. Token é usado em todos os cabeçalhos de requisições, autorizando o usuário.
+ 2. É enviado um e-mail de boas vindas ao usuário.
+ 
 
- Após o retorno o token é gravado no localStorage, apartir disso é usado em todos os cabeçalhos de requisições, autorizando o usuário.
+&nbsp;
+#### Login
+Usuários bloqueados não tem acesso ao sistema.
+```
+## Login
+
+Method: POST
+API: localhost:8000/api/login
+
+Dados enviados:
+{
+	cpf: '',
+	password: ''
+	device_name: 'Browser'
+}
+```
+
+```
+## Retorno após login
+
+ Dados retornados:
+ {
+	 user: {
+		 tenant_id: '',
+		 type: '', 	// 1 = Administrador, 2 = Usuario Comum
+		 stats: '',	// 0 = Inativo, 1 = Ativo
+		 cpf: '',
+		 name: '',
+		 email: ''
+	 },
+	 token: ''
+ }
+```
+ 1. Após o retorno o token é gravado no localStorage
+ 2. Token é usado em todos os cabeçalhos de requisições, autorizando o usuário.
 
 
 &nbsp;
-##### Profile
-Recurso que permite o usuário editar suas informações pessoais assim como trocar sua senha.
+#### Profile
+Funcionalidade que permite o usuário editar suas informações pessoais assim como trocar sua senha.
+
 ```
 ## Retorna dados do perfil
 
@@ -128,8 +146,8 @@ Dados enviados:
 
 
 &nbsp;
-##### Users
-A aplicação permite adicionar outros usuários ao tenant, assim vão poder gerenciar todas as informações.
+#### Users
+A aplicação permite adicionar outros usuários ao tenant, que poderão gerenciar todas as informações.
 
 ```
 ## Listar Usuário
@@ -179,28 +197,65 @@ Dados enviados:
 }
 ```
 
+&nbsp;
+#### Tokens
+Ao logar é gerado um token que é armazenado no banco de dados, permanecendo até o usuário ser deslogado ou o token excluído.
+
+```
+## Listar Tokens
+
+Method: Get
+API: localhost:8000/api/config/tokens
+
+Retorna lista de tokens:
+{
+	tokenable_id: '',	// Relaciona ao usuário
+	name: '', 		// Onde o token foi gerado
+	token: '',		
+	abilities: '',		// Define oque o usuário pode acessar
+	last_used_at: '',
+	created_at: ''
+},
+{
+	...
+}
+```
+```
+## Remover Token do Banco de dados
+
+Method: Delete
+API: localhost:8000/api/config/tokens/id
+
+Retorno após token removido:
+{
+	response: 'Token removido com sucesso',
+	stats: 201
+}
+```
+
+---
 
 &nbsp;
-#### Features
-Uma feature é uma funcionalidade do sistema que entrega um benefício ou resolve um problema real do cliente
+### COMO POSSO TESTAR?
+Baixe as duas pastas e dentro de suas respectivos diretórios execute os comandos:
 
-> 20/04
-- [x] Editar perfil do usuário logado
-- [x] Gerenciar usuários por tenant:
-- [x] O adm pode excluir usuários exceto seu proprio cadastro.
-- [x] Habilitar/Desabilitar usuários.
-- [x] Usuários desabilitados não podem acessar o sistema.
-- [ ] Acrescentar Mensagem "Registro deletado com Sucesso"
-- [ ] Visualizar/Remover tokens ativos
-- [ ] Ao se registrar enviar e-mail de boas vindas
-- [ ] Redefinir Senha
-- [ ] Opção de avatar no perfil do usuário
+##### VUEJS: Setup Inicial
+```
+npm install
+```
+
+##### VUEJS: Rodar server
+```
+npm run serve
+```
 
 
-
-
-
-
-&nbsp;
-#### Refatoração
-Refatoração é o processo de modificar um sistema de software para melhorar a estrutura interna do código sem alterar seu comportamento externo.
+##### API: Criar tabelas no banco
+```
+php artisan migrate
+```
+##### API: Rodar servidor PHP
+```
+php artisan serve
+```
+**Não esqueça de configurar e criar o banco de dados**
