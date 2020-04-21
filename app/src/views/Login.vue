@@ -28,7 +28,7 @@
 										v-model="form.password">
 							</base-input>
 
-							<base-checkbox class="custom-control-alternative">
+							<base-checkbox class="custom-control-alternative"  v-model="checked">
 								<span class="text-muted">Manter conectado</span>
 							</base-checkbox>
 							<div class="text-center">
@@ -106,6 +106,7 @@
 				modals: {
 					modal: false
 				},
+				checked: false,
 				form: {
 					email: '',
 					cpf: '',
@@ -135,6 +136,9 @@
 				Auth.login(this.form)
 				.then( response => {
 					localStorage.setItem("token", response.data.token);
+					if(this.checked == true){
+						localStorage.setItem("ative", true);
+					}
 					this.$router.push({ name: "dashboard"});
 				})
 				.catch(error => {
