@@ -25,7 +25,7 @@ Feito em ***Vuejs2***, e templates free para agilizar o desenvolvimento.
 	- [x] Eu concordo com a Política de Privacidade.
 
 - [x] Login
-	- [ ] Me manter conectado
+	- [x] Me manter conectado
 	- [x] Bloqueia acesso de usuários inativos.
 
 - [x] Logout
