@@ -39,7 +39,7 @@
 						</base-input>
 
 						<base-input class="input-group-alternative"
-									placeholder="Senha"
+									placeholder="Confirmar Senha"
 									type="password"
 									addon-left-icon="ni ni-lock-circle-open"
 									v-model="form.password_confirmation">

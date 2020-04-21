@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Webpatser\Uuid\Uuid;
+use Illuminate\Support\Facades\Mail;
 
 use App\Models\User;
 use App\Models\Tenant;
+use App\mail\Register;
 
 class RegisterCtrl extends Controller
 {
@@ -53,6 +55,8 @@ class RegisterCtrl extends Controller
             'user'  => $user,
             'token' => $token
         ];
+
+        Mail::to($request->email)->send(new Register());
 
         return $return;
     }

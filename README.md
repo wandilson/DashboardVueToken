@@ -21,11 +21,14 @@ Feito em ***Vuejs2***, e templates free para agilizar o desenvolvimento.
 ### Features
 > 21/04
 - [x] Register
-	- [ ] Envia e-mail de boas vindas ao se registrar.
+	- [x] Envia e-mail de boas vindas ao se registrar.
+	- [ ] Eu concordo com a Política de Privacidade.
 
 - [x] Login
+	- [ ] Me manter conectado
 - [x] Logout
 	- [ ] Bloqueia acesso de usuários inativos.
+	- [ ] Deslogar ao fechar aba do navegador.
 
 - [x] Redefinir Senha
 - [ ] Profile
