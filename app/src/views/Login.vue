@@ -32,7 +32,7 @@
 								<span class="text-muted">Manter conectado</span>
 							</base-checkbox>
 							<div class="text-center">
-								<base-button type="primary" class="my-4" @click.prevent="login">Acessar</base-button>
+								<base-button type="primary" class="my-4" @click.prevent="login" :disabled="!isValid">Acessar</base-button>
 							</div>
 						</form>
 					</div>
@@ -116,6 +116,11 @@
 				errors: [],
 				errorRedefine: [],
 				success: false
+			}
+		},
+		computed: {
+			isValid: function () {
+				return  this.form.cpf != '' && this.form.password != '';
 			}
 		},
 		methods: {

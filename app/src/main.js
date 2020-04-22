@@ -21,6 +21,9 @@ import router from './router'
 import './registerServiceWorker'
 import ArgonDashboard from './plugins/argon-dashboard'
 
+import VueMask from 'v-mask'
+Vue.use(VueMask);
+
 Vue.config.productionTip = false
 
 

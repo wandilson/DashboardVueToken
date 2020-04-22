@@ -49,11 +49,6 @@ const router = new Router({
           path: '/users',
           name: 'Usuários',
           component: () => import(/* webpackChunkName: "demo" */ './views/Users.vue')
-        },
-        {
-          path: '/tokens',
-          name: 'Tokens',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Tokens.vue')
         }
       ]
     },

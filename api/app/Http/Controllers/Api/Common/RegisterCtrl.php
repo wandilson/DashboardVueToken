@@ -18,24 +18,24 @@ class RegisterCtrl extends Controller
     {
         $request->validate([
             'cpf'  =>  ['required', 'numeric'],
-            'name'  =>  ['required'],
+            'name_first'  =>  ['required'],
             'email' =>  ['required', 'email', 'unique:users'],
             'password'  =>  ['required', 'min:8', 'confirmed']
         ]);
 
 
         $tenant = Tenant::create([
-            'name'  =>  $request->name
+            'name'  =>  $request->name_first
         ]);
 
         
         $user = User::create([
-            'tenant_id'  =>  $tenant['id'],
-            'type'      =>  1,
-            'cpf'       =>  $request->cpf,
-            'name'       =>  $request->name,
-            'email'      =>  $request->email,
-            'password'   =>  Hash::make($request->password)
+            'tenant_id'     =>  $tenant['id'],
+            'type'          =>  1,
+            'cpf'           =>  $request->cpf,
+            'name_first'    =>  $request->name_first,
+            'email'         =>  $request->email,
+            'password'      =>  Hash::make($request->password)
         ]);
 
         

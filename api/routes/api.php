@@ -25,6 +25,9 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::delete('users/{id}', 'Api\Common\UserCtrl@delete');
         Route::post('users/disable', 'Api\Common\UserCtrl@disable');
 
+        Route::get('uf', 'Api\Common\UserCtrl@uf');
+        Route::get('city/{id}', 'Api\Common\UserCtrl@city');
+
 
         // Logout
         Route::post('logout', 'Api\Common\LoginCtrl@logout');

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserFormRequest;
 
 use App\Models\User;
+use DB;
 
 class UserCtrl extends Controller
 {
@@ -19,6 +20,22 @@ class UserCtrl extends Controller
     {
         $tenant_id = auth()->user()->tenant->id;
         $data = User::where('tenant_id',  $tenant_id)->get();
+
+        return response()->json($data);
+    }
+
+    /**
+     * Lista de Estados/Cidade
+     */
+    public function uf()
+    {
+        $data = DB::table('states')->get();
+
+        return response()->json($data);
+    }
+    public function city($id)
+    {
+        $data = DB::table('cities')->where('state_id', $id)->get();
 
         return response()->json($data);
     }
@@ -44,11 +61,19 @@ class UserCtrl extends Controller
         ]);
 
         $result = User::create([
-            'tenant_id' =>   $tenant_id,
-            'cpf'       =>   $request->cpf,
-            'name'       =>  $request->name,
-            'email'      =>  $request->email,
-            'password'   =>  Hash::make($request->password)
+            'tenant_id'     =>  $tenant_id,
+            'city_id'       =>  $request->city_id,
+            'state_id'      =>  $request->state_id,
+            'cpf'           =>  $request->cpf,
+            'name_first'    =>  $request->name_first,
+            'name_last'     =>  $request->name_last,
+            'birth'         =>  $request->birth,
+            'cell_phone'    =>  $request->cell_phone,
+            'address'       =>  $request->address,
+            'zip_code'      =>  $request->zip_code,
+            'information'   =>  $request->information,
+            'email'         =>  $request->email,
+            'password'      =>  Hash::make($request->password)
         ]);
 
         return response()->json(['response'=>'Registro Criado com Sucesso!'], 201);

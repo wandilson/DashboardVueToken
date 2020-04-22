@@ -18,13 +18,25 @@ class CreateUsersTable extends Migration
 
             $table->foreignId('tenant_id')->constrained()->onDelete('cascade');
 
+            $table->unsignedBigInteger('city_id')->nullable();
+            $table->foreign('city_id')->references('id')->on('cities');
+            $table->integer('state_id')->nullable();
+
             $table->bigInteger('type')->default('2')->comment('1 = Administrador, 2 = Usuario Comum');
             $table->bigInteger('stats')->default('1')->comment('0 = Inativo, 1 = Ativo');
+
             $table->string('cpf')->unique();
-            $table->string('name');
+            $table->string('name_first')->nullable();
+            $table->string('name_last')->nullable();
+            $table->string('birth')->nullable();
+            $table->string('cell_phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('zip_code')->nullable();
+            $table->longText('information')->nullable();
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

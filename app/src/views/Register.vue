@@ -20,9 +20,9 @@
 						</base-input>
 
 						<base-input class="input-group-alternative mb-3"
-									placeholder="Nome"
+									placeholder="Seu primeiro nome"
 									addon-left-icon="ni ni-hat-3"
-									v-model="form.name">
+									v-model="form.name_first">
 						</base-input>
 
 						<base-input class="input-group-alternative mb-3"
@@ -100,7 +100,7 @@
 				checked: false,
 				form: {
 					cpf: '',
-					name: '',
+					name_first: '',
 					email: '',
 					password: '',
 					password_confirmation: '',
@@ -112,7 +112,7 @@
 		},
 		computed: {
 			isValid: function () {
-				return  this.checked != false;
+				return  this.checked != false && this.form.cpf != '' && this.form.name_first != '' && this.form.email != '' && this.form.password != '' && this.form.password_confirmation != '';
 			}
 		},
 		methods: {

@@ -24,7 +24,7 @@ class UserFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  =>  'required',
+            'name_first'  =>  'required',
             'cpf'   =>  ['required', 'unique:users,cpf,'.$this->id],
             'email' =>  ['required', 'unique:users,email,'.$this->id]
         ];

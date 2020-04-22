@@ -29,11 +29,11 @@ Feito em ***Vuejs2***, e templates free para agilizar o desenvolvimento.
 	- [x] Bloqueia acesso de usuários inativos.
 
 - [x] Logout
-	- [ ] Deslogar ao fechar aba do navegador.
+	- [ ] Deslogar ao fechar aba do navegador "***Não Faço idéia de como fazer***".
 
 - [x] Redefinir Senha
-- [ ] Profile
-- [ ] Tokens
+- [#] Profile
+	- [ ] Incrementar Avatar
 - [ ] Users
 	- [ ] Usuários com o ***Type:1*** não podem ser excluidos nem bloqueados.
 

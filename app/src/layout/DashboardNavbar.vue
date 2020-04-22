@@ -35,10 +35,6 @@
                         <router-link to="/users" class="dropdown-item">
                             <i class="ni ni-settings-gear-65"></i>
                             <span>Usuários</span>
-                        </router-link>                        
-                        <router-link to="/tokens" class="dropdown-item">
-                            <i class="ni ni-settings-gear-65"></i>
-                            <span>Tokens</span>
                         </router-link>
                         <div class="dropdown-divider"></div>
                         <a href="javascript:void(0)" @click="logout" class="dropdown-item">
