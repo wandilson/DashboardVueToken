@@ -7,7 +7,7 @@
 			<!-- Header container -->
 			<div class="container-fluid d-flex align-items-center">
 				<div class="row">
-					<div class="col-lg-7 col-md-10">
+					<div class="col">
 						<h1 class="display-2 text-white">Olá {{form.name_first}}</h1>
 						<p class="text-white mt-0 mb-5">{{form.information}}</p>
 					</div>

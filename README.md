@@ -16,7 +16,10 @@ Feito em ***Vuejs2***, e templates free para agilizar o desenvolvimento.
 - [x] Vuejs
 - [x] Vue-Router
 - [x] Axios
+- [x] momentjs
+- [x] v-mask
 - [ ] Vuex
+
 
 ### Features
 > 21/04
@@ -32,7 +35,7 @@ Feito em ***Vuejs2***, e templates free para agilizar o desenvolvimento.
 	- [ ] Deslogar ao fechar aba do navegador "***Não Faço idéia de como fazer***".
 
 - [x] Redefinir Senha
-- [#] Profile
+- [x] Profile
 	- [ ] Incrementar Avatar
 - [ ] Users
 	- [ ] Usuários com o ***Type:1*** não podem ser excluidos nem bloqueados.

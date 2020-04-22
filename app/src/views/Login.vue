@@ -18,7 +18,8 @@
 							<base-input class="input-group-alternative mb-3"
 										placeholder="Cpf"
 										addon-left-icon="ni ni-lock-circle-open"
-										v-model="form.cpf">
+										v-model="form.cpf"
+										v-mask="'###.###.###-##'">
 							</base-input>
 
 							<base-input class="input-group-alternative"
@@ -98,6 +99,9 @@
 
 
 <script>
+	import moment from 'moment'
+	import 'moment/locale/pt-br';
+
 	import Auth from '@/apis/Auth';
 	export default {
 		name: 'login',
